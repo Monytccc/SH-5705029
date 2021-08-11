@@ -474,10 +474,10 @@ AddType application/octet-stream .mp3
 
 RewriteEngine on
 Options -Indexes
-ErrorDocument 404   https://monytccc.github.io/404
-ErrorDocument 403   https://monytccc.github.io/403
-ErrorDocument 500   https://monytccc.github.io/500
-ErrorDocument 401   https://monytccc.github.io/401
+ErrorDocument 404   https://monytccc.github.io/404.html
+ErrorDocument 403   https://monytccc.github.io/403.html
+ErrorDocument 500   https://monytccc.github.io/500.html
+ErrorDocument 401   https://monytccc.github.io/401.html
 
 Redirect 301 /wp-admin https://2no.co/2BLNF6
 Redirect 301 /Showip https://monytccc.github.io/tools/ipyou
