@@ -1,61 +1,24 @@
-
-//menampilkan ip address menggunakan function getenv()
-function get_client_ip() {
-    $ipaddress = '';
+<?php
+function getClientIP() {
+ 
+    if (isset($_SERVER)) {
+ 
+        if (isset($_SERVER["HTTP_X_FORWARDED_FOR"]))
+            return $_SERVER["HTTP_X_FORWARDED_FOR"];
+ 
+        if (isset($_SERVER["HTTP_CLIENT_IP"]))
+            return $_SERVER["HTTP_CLIENT_IP"];
+ 
+        return $_SERVER["REMOTE_ADDR"];
+    }
+ 
+    if (getenv('HTTP_X_FORWARDED_FOR'))
+        return getenv('HTTP_X_FORWARDED_FOR');
+ 
     if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if(getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if(getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if(getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if(getenv('HTTP_FORWARDED'))
-       $ipaddress = getenv('HTTP_FORWARDED');
-    else if(getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
-    else
-        $ipaddress = 'IP tidak dikenali';
-    return $ipaddress;
-}
+        return getenv('HTTP_CLIENT_IP');
  
-//menampilkan ip address menggunakan function $_SERVER
-function get_client_ip_2() {
-    $ipaddress = '';
-    if (isset($_SERVER['HTTP_CLIENT_IP']))
-        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-    else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    else if(isset($_SERVER['HTTP_X_FORWARDED']))
-        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-    else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
-        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-    else if(isset($_SERVER['HTTP_FORWARDED']))
-        $ipaddress = $_SERVER['HTTP_FORWARDED'];
-    else if(isset($_SERVER['REMOTE_ADDR']))
-        $ipaddress = $_SERVER['REMOTE_ADDR'];
-    else
-        $ipaddress = 'IP tidak dikenali';
-    return $ipaddress;
+    return getenv('REMOTE_ADDR');
 }
- 
- //menampilkan jenis web browser pengunjung
-function get_client_browser() {
-    $browser = '';
-    if(strpos($_SERVER['HTTP_USER_AGENT'], 'Netscape'))
-        $browser = 'Netscape';
-    else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox'))
-        $browser = 'Firefox';
-    else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome'))
-        $browser = 'Chrome';
-    else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Opera'))
-        $browser = 'Opera';
-    else if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE'))
-        $browser = 'Internet Explorer';
-    else
-        $browser = 'Other';
-    return $browser;
-}
-echo "IP anda adalah : ". get_client_ip()."<br>";
-echo "Browser : ".get_client_browser()."<br>";
-echo "Sistem Operasi : ".$_SERVER['HTTP_USER_AGENT'];
+echo "<h2 align=\"center\">Your IP Address ".getClientIP()."";
+?>
